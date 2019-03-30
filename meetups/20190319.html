@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Composants interactifs - A11yMtl 2019-03-19</title>
+    <style>
+        .newLine {
+            display: block;
+        }
+
+        small {
+            font-size: 80%;
+        }
+
+        h2 {
+            margin-top: 35px;
+        }
+
+        h3 {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Composants interactifs <small class="newLine">A11yMtl 2019-03-19</small></h1>
+        <p>par Jean-Marie D&rsquo;Amour<span class="newLine"> et Guillaume D&rsquo;Amour</span></p>
+        <h2>Ingr&eacute;dients d&rsquo;un composant interactif accessible</h2>
+        <ul>
+            <li>HTML s&eacute;mantique</li>
+            <li>Habillage CSS avec indices visuels pour le type d&rsquo;interactivit&eacute;</li>
+            <li>WAI-ARIA d&eacute;claratifs choisis avec soin</li>
+            <li>Programmation javascript pour l&rsquo;interaction &agrave; la souris et au clavier</li>
+        </ul>
+        <h2>Menus d&eacute;roulants (le meilleur choix est pr&eacute;c&eacute;d&eacute; d&rsquo;une &eacute;toile, le pire du signe)</h2>
+        <h3>&Eacute;tat des lieux</h3>
+        <ul>
+            <li>Beaucoup de menus d&eacute;roulants invisibles pour les lecteurs d&rsquo;&eacute;cran et inutilisables au clavier (qui se pr&eacute;sentent comme des liens sans effet)</li>
+            <li>Plusieurs menus forcent &agrave; passer en mode interactif (mode formulaire)</li>
+        </ul>
+        <h3><a href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/menubar/menubar-1/menubar-1.html" rel="external">WAI-ARIA Authoring Practices 1.1</a></h3>
+        <ul>
+            <li>NVDA+Firefox&nbsp;: impossible de l&rsquo;activer avec ESPACE ou ENTR&Eacute;E, il faut passer manuellement en mode interactif avec NVDA+ESPACE et en sortir de la m&ecirc;me fa&ccedil;on.</li>
+            <li>JAWS2019+Chrome&nbsp;: s&rsquo;active avec ESPACE ou ENTR&Eacute;E, mais il n&rsquo;est pas possible d&rsquo;en sortir avec &Eacute;CHAPPE ou une autre commande, il faut absolument faire un choix dans le menu.</li>
+            <li>* VoiceOver+Safari sur iOS&nbsp;: fonctionne tel qu&rsquo;attendu, mais le vocabulaire est diff&eacute;rent&nbsp;: &laquo;&nbsp;Affiche le menu local&nbsp;&raquo;.</li>
+            <li>TalkBack+Chrome sur Android&nbsp;: impossible de l&rsquo;activer avec le double-clic car il retourne en d&eacute;but de page.</li>
+        </ul>
+        <h3><a href="https://wet-boew.github.io/v4.0-ci/index-fr.html" rel="external">Site de la BOEW</a></h3>
+        <ul>
+            <li>NVDA+ Firefox&nbsp;: passe automatiquement en mode interactif d&egrave;s qu&rsquo;on arrive sur le composant, il faut savoir comment sortir du mode interactif avec NVDA+ESPACE.</li>
+            <li>JAWS2019+Chrome&nbsp;: s&rsquo;active avec ESPACE ou ENTR&Eacute;E, mais il n&rsquo;est pas possible d&rsquo;en sortir avec &Eacute;CHAPPE ou une autre commande, il faut absolument faire un choix dans le menu.</li>
+            <li>VoiceOver+Safari sur iOS&nbsp;: perd le focus si l&rsquo;on tente de parcourir tous les menus &agrave; la suite les uns des autres.</li>
+            <li>* TalkBack+Chrome sur Android&nbsp;: fonctionne tel qu&rsquo;attendu</li>
+        </ul>
+        <h3><a href="https://www.desjardins.com/" rel="external">* Desjardins (menu prinicpal)</a></h3>
+        <ul>
+            <li>* NVDA+Firefox&nbsp;: ouvre le menu avec ESPACE ou ENTR&Eacute;E et le ferme avec &Eacute;CHAPPE, parcourt le menu sans passer en mode interactif, seul petit b&eacute;mol, le menu ne se referme pas automatiquement quand on passe au menu suivant.</li>
+            <li>* JAWS2019+Chrome&nbsp;: idem NVDA, mais offre le raccourci clavier pour atteindre un panneau d&rsquo;onglet (pourquoi?)</li>
+            <li>* VoiceOver+Safari sur iOS&nbsp;: fonctionne bien sans perte de focus</li>
+            <li>* TalkBack+Chrome sur Android&nbsp;: fonctionne tel qu&rsquo;attendu</li>
+        </ul>
+
+        <h2>Accord&eacute;ons</h2>
+        <h3>&Eacute;tat des lieux</h3>
+        <ul>
+            <li>Plusieurs sites utilisent des panneaux &agrave; onglets verticaux qui forcent &agrave; passer en mode interactif</li>
+            <li>Beaucoup d&rsquo;autres sites utilisent de simples liens qui apparaissent comme sans effet pour un lecteur d&rsquo;&eacute;cran car le feedback n&rsquo;est que visuel</li>
+        </ul>
+        <h3><a href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html" rel="external">WAI-ARIA Authoring Practices 1.1</a></h3>
+        <ul>
+            <li>* NVDA+Firefox&nbsp;: bouton avec feedback &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>* JAWS2019+Chrome&nbsp;: bouton avec feedback &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>* VoiceOver+Safari sur iOS&nbsp;: bouton avec feedback, sauf le vocabulaire &laquo;&nbsp;condens&eacute;&nbsp;&raquo; ou &laquo;&nbsp;&eacute;tendu&nbsp;&raquo;</li>
+            <li>* TalkBack+Chrome sur Android&nbsp;: bouton avec feedback &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+        </ul>
+        <h3><a href="https://www.teluq.ca/site/infos/joindre.php" rel="external">TELUQ</a></h3>
+        <ul>
+            <li>NVDA+Firefox&nbsp;: identifi&eacute;s comme des onglets, sans feedback sur l&rsquo;&eacute;tat, mais ne forcent pas &agrave; passer en mode interactif</li>
+            <li>JAWS2019+Chrome&nbsp;: identifi&eacute;s comme des onglets, force &agrave; passer en mode interactif dont un peut facilement sortir avec &Eacute;CHAPPE, le seul feedback est le basculement en mode interactif et l&rsquo;offre de la commande de JAWS pour atteindre le panneau contr&ocirc;l&eacute;</li>
+            <li>VoiceOver+Safari sur iOS&nbsp;: identifi&eacute;s comme des onglets, sans feedback sur l&rsquo;&eacute;tat</li>
+            <li>TalkBack+Chrosme sur Android&nbsp;: identifi&eacute;s comme des onglets, sans feedback sur l&rsquo;&eacute;tat</li>
+        </ul>
+        <h3><a href="https://boutique.mcq.org/qc/content/7-activer-mon-abonnement" rel="external">Mus&eacute;e de la civilisation</a></h3>
+        <ul>
+            <li>NVDA+Firefox&nbsp;: titre de niveau 4 et lien r&eacute;p&eacute;t&eacute; lorsqu&rsquo;activ&eacute;, mais pas de feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>JAWS 2019+Chrome&nbsp;: titre de niveau 4 et lien r&eacute;p&eacute;t&eacute; lorsqu&rsquo;activ&eacute;, mais pas de feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>VoiceOver+Safari sur iOS&nbsp;: titre de niveau 4 et lien r&eacute;p&eacute;t&eacute; lorsqu&rsquo;activ&eacute;, mais pas de feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>TalkBack+Chrosme sur Android&nbsp;: Titre de niveau 4 et lien sans aucun feedback lorsqu&rsquo;activ&eacute;</li>
+        </ul>
+        <h3><a href="https://labo.raamm.org/formation/clienteles-cibles/" rel="external">* Laboratoire du RAAMM</a></h3>
+        <ul>
+            <li>* NVDA+Firefox&nbsp;: &agrave; la fois titre et bouton avec feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>* JAWS2019+Chrome&nbsp;: &agrave; la fois titre et bouton avec feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;r&eacute;duit&nbsp;&raquo; ou &laquo;&nbsp;d&eacute;velopp&eacute;&nbsp;&raquo;</li>
+            <li>* VoiceOver+Safari sur iOS&nbsp;: &agrave; la fois titre et bouton avec feedback sur l&rsquo;&eacute;tat &laquo;&nbsp;condens&eacute;&nbsp;&raquo; ou &laquo;&nbsp;&eacute;tendu&nbsp;&raquo;</li>
+            <li>TalkBack+Chrosme sur Android&nbsp;: &agrave; la fois titre et bouton, mais le feedback sur l&rsquo;&eacute;tat n&rsquo;est donn&eacute; qu&rsquo;une fois que l&rsquo;on revient sur le bouton</li>
+        </ul>
+        <h3>Accord&eacute;ons ou onglets?</h3>
+        <ul>
+            <li>Il faut &eacute;viter de forcer le mode interactif qui cr&eacute;e de la confusion pour l&rsquo;utilisateur moins exp&eacute;riment&eacute; ou moins concentr&eacute;</li>
+            <li>On peut r&eacute;aliser la m&ecirc;me pr&eacute;sentation visuelle avec des accord&eacute;ons dispos&eacute;s &agrave; l&rsquo;horizontale ou &agrave; la verticale</li>
+            <li>Les onglets augmentent le risque de perte de focus avec VoiceOver</li>
+        </ul>
+        <h2>Boite de dialogue d&rsquo;alerte et modale</h2>
+        <h3>Comportement attendu</h3>
+        <ul>
+            <li>D&eacute;placement du focus dans la boite de dialogue, mais o&ugrave;?</li>
+            <li>Annonce qu&rsquo;il s&rsquo;agit d&rsquo;un dialogue et son titre</li>
+            <li>Restriction de la navigation &agrave; l&rsquo;int&eacute;rieur du dialogue</li>
+            <li>Sortie possible avec la touche &Eacute;CHAPPE en plus des boutons</li>
+            <li>Retour &agrave; l&rsquo;&eacute;l&eacute;ment d&eacute;clencheur</li>
+        </ul>
+        <h3><a href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html" rel="external">WAI-ARIA Authoring Practices 1.1 dialogue d&rsquo;alerte</a></h3>
+        <ul>
+            <li>NVDA+Firefox&nbsp;: identifie clairement le dialogue et son titre, lit le message et se place sur le bouton par d&eacute;faut</li>
+            <li>JAWS+Chrome&nbsp;: identifie clairement le dialogue et son titre, lit le message et se place sur le bouton par d&eacute;faut</li>
+            <li>VoiceOver+Safari sur iOS&nbsp;: n&rsquo;indique pas clairement qu&rsquo;il s&rsquo;agit d&rsquo;un dialogue, lit le contenu et les boutons, mais ne restreint pas la navigation &agrave; l&rsquo;int&eacute;rieur du dialogue</li>
+            <li>Talkback+Chrome sur Android&nbsp;: ne lit que le bouton No, il faut se d&eacute;placer pour lire le reste du dialogue, n&rsquo;est pas restreint &agrave; l&rsquo;int&eacute;rieur du dialogue mais ram&egrave;ne le focus correctement &agrave; son point de d&eacute;part quand on ferme le dialogue</li>
+            <li>- ZoomText+Firefox&nbsp;: le focus se place sur le bouton No, en 4X on ne voit que les boutons et il faut remonter pour lire le dialogue</li>
+        </ul>
+        <h3><a href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html" rel="external">WAI-ARIA Authoring Practices 1.1 dialogue modal</a></h3>
+        <ul>
+            <li>NVDA+Firefox&nbsp;: trop d&rsquo;information &agrave; la fois, identifie clairement le dialogue et son titre, indique qu&rsquo;il passe en mode formulaire, lit l&rsquo;&eacute;tiquette du champ et son type (difficile de tout retenir)</li>
+            <li>JAWS+Chrome&nbsp;: trop d&rsquo;information &agrave; la fois, identifie clairement le dialogue et son titre, indique qu&rsquo;il passe en mode formulaire, lit l&rsquo;&eacute;tiquette du champ et son type (difficile de tout retenir), mais ajoute &agrave; chaque champ &laquo;&nbsp;a un popup&nbsp;&raquo; (pourquoi?)</li>
+            <li>VoiceOver+Safari sur iOS&nbsp;: indique clairement qu&rsquo;il s&rsquo;agit d&rsquo;un message Web, lit le contenu et les boutons, mais restreint la navigation &agrave; l&rsquo;int&eacute;rieur du dialogue (probablement parce que la page d&rsquo;en-dessous n&rsquo;est pas visible, encore beaucoup d&rsquo;information &agrave; la fois</li>
+            <li>- Talkback+Chrome sur Android&nbsp;: ne lit que le champ sur lequel il arrive</li>
+            <li>- ZoomText+Firefox&nbsp;: le focus se place dans le premier champ, en 4X on ne voit ni le titre, ni l&rsquo;&eacute;tiquette du champ qui devrait &ecirc;tre plac&eacute;e au-dessus</li>
+        </ul>
+        <h3><a href="https://labo.raamm.org/lab/tests/modal/index.html#modal2-btn" rel="external">Laboratoire du RAAMM (avec ou sans champ de formulaire)</a></h3>
+        <ul>
+            <li>* NVDA+Firefox&nbsp;: identifie clairement le dialogue et place le focus sur son titre et indique &laquo;&nbsp;document&nbsp;&raquo;</li>
+            <li>* JAWS+Chrome&nbsp;: identifie clairement le dialogue et place le focus sur son titre, sauf l&rsquo;indication &laquo;&nbsp;document&nbsp;&raquo;</li>
+            <li>- VoiceOver+Safari sur iOS&nbsp;: Indique qu&rsquo;il s&rsquo;agit d&rsquo;un message Web dans un seul des deux cas, n&rsquo;est pas restreint &agrave; l&rsquo;int&eacute;rieur du dialogue</li>
+            <li>Talkback+Chrome sur Android&nbsp;: n&rsquo;indique pas qu&rsquo;il s&rsquo;agit d&rsquo;un dialogue, mais lit tout le contenu et les boutons puis ram&egrave;ne correctement le focus</li>
+            <li>* ZoomText+Firefox&nbsp;: le focus se place sur le titre de la boite de dialogue, ce qui permet de mieux l&rsquo;identifier et de la parcourir</li>
+        </ul>
+    </main>
+</body>
+
+</html>
